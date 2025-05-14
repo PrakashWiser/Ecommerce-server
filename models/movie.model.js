@@ -1,17 +1,9 @@
 import { model, Schema } from "mongoose";
 
-const schema = new Schema({
-  title: {
-    type: String,
-    required: true, 
-    unique: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
+const movieSchema = new Schema({
+  title: { type: String, required: true },
+  description: String,
 });
 
-
-const Movie = model("movie", schema);
+const Movie = model("movie", movieSchema);
 export default Movie;
