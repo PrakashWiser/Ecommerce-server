@@ -10,7 +10,7 @@ connectDB();
 app.get("/", (req, res) => {
   res.json({ msg: "This Server" });
 });
-
+app.use(express.json());
 app.use("/movies", movieRoutes);
 app.listen(PORT, () => {
   console.log(`server is Sucessfully runing http://localhost:${PORT}`);
