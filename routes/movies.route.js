@@ -5,10 +5,9 @@ import {
   createMovie,
   updateMovie,
   deleteMovie,
-} from "../controllers/movie.controller.js";
+} from "../controllers/movie.controllers.js";
 
 const router = express.Router();
-
 router.route("/").get(getMovies).post(createMovie);
 
 router.route("/:id").get(getMovieById).put(updateMovie).delete(deleteMovie);
