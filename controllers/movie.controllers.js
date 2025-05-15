@@ -13,7 +13,7 @@ export const getMovieById = async (req, res) => {
 
 export const createMovie = async (req, res) => {
   const { title, description } = req.body;
-  const movie = new Movie({ title, description });
+  const movie = new Movie({ title, description }); 
   const saved = await movie.save();
   res.status(201).json(saved);
 };

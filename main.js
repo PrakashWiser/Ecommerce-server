@@ -1,9 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./lib/db.js";
-import movieRoutes from "./routes/movie.routes.js";
-import reviewRoutes from "./routes/review.routes.js";
-import { errorHandler, notFound } from "./middlewares/errorHandler.js";
+import movieRoutes from "./routes/movies.route.js";
+import { errorHandler, notFound } from "./middlewars/errorhandler.js";
 
 dotenv.config();
 connectDB();
