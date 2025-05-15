@@ -1,19 +1,28 @@
 import express from "express";
-import movieRoutes from "./routes/movies.route.js";
-import connectDB from "./lib/db.js";
 import dotenv from "dotenv";
+import connectDB from "./lib/db.js";
+import movieRoutes from "./routes/movie.routes.js";
+import reviewRoutes from "./routes/review.routes.js";
+import { errorHandler, notFound } from "./middlewares/errorHandler.js";
+
 dotenv.config();
+connectDB();
+
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-connectDB();
-app.get("/", (req, res) => {
-  res.json({ msg: "This Server" });
-});
-
 app.use(express.json());
 
-app.use("/movies", movieRoutes);
+app.get("/", (req, res) => {
+  res.json({ message: "Server is running successfully" });
+});
+
+app.use("/api/movies", movieRoutes);
+app.use("/api/reviews", reviewRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
+
 app.listen(PORT, () => {
-  console.log(`server is Sucessfully runing http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
