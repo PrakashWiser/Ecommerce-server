@@ -13,3 +13,4 @@ router.route("/").get(getMovies).post(createMovie);
 router.route("/:id").get(getMovieById).put(updateMovie).delete(deleteMovie);
 
 export default router;
+                   

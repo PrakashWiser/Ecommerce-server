@@ -17,7 +17,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/movies", movieRoutes);
-app.use("/api/reviews", reviewRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
