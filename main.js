@@ -2,9 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./lib/db.js";
 import movieRoutes from "./routes/movies.route.js";
+import productRoutes from "./routes/product.route.js";
 import { errorHandler, notFound } from "./middlewares/errorhandler.js";
 import { protect } from "./middlewares/auth.middelware.js";
 import authRoutes from "./routes/auth.route.js";
+
 dotenv.config();
 connectDB();
 
@@ -19,6 +21,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/movies", movieRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+
 app.use(notFound);
 app.use(errorHandler);
 
