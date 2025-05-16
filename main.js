@@ -6,12 +6,21 @@ import productRoutes from "./routes/product.route.js";
 import { errorHandler, notFound } from "./middlewares/errorhandler.js";
 import { protect } from "./middlewares/auth.middelware.js";
 import authRoutes from "./routes/auth.route.js";
+import cors from "cors";
 
 dotenv.config();
 connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json());
 
