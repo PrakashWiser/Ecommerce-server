@@ -14,13 +14,7 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors());
 
 app.use(express.json());
 
@@ -40,5 +34,5 @@ app.get("/api/secret", protect, (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Server is Sucessfully running at http://localhost:${PORT}`);
 });
