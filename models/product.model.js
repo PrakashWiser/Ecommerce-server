@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema(
     listingType: {
       type: String,
       required: true,
-      enum: ["skateboard", "bike", "shoe", "other","clothing"],
+      enum: ["skateboard", "bike", "shoe", "other","clothing","headphone"],
     },
   },
   { timestamps: true }
