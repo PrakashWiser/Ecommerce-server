@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({ message: "Server is running successfully" });
+  res.json({ message: "✅ Server is running successfully" });
 });
 
 app.use("/api/movies", movieRoutes);
@@ -34,5 +34,5 @@ app.get("/api/secret", protect, (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is Sucessfully running at http://localhost:${PORT}`);
+  console.log(`🚀 Server is running at: http://localhost:${PORT}`);
 });
