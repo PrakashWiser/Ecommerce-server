@@ -10,6 +10,7 @@ import cors from "cors";
 
 dotenv.config();
 connectDB();
+console.log("JWT_SECRET from .env:", process.env.JWT_SECRET);
 
 const app = express();
 const PORT = process.env.PORT || 5001;
