@@ -3,12 +3,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-
-if (!JWT_SECRET) {
-  throw new Error("❌ JWT_SECRET is not defined");
-}
 
 export const registerUser = async (req, res) => {
   const { name, number, email, password } = req.body;
@@ -64,6 +62,12 @@ export const forgotPassword = async (req, res) => {
   const { email } = req.body;
 
   try {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      return res.status(500).json({
+        message: "Email service is not configured. Please contact support.",
+      });
+    }
+
     const user = await User.findOne({ email });
     if (!user)
       return res.status(400).json({ message: "No user with that email" });

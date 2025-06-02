@@ -1,5 +1,6 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
 import connectDB from "./lib/db.js";
 import movieRoutes from "./routes/movies.route.js";
 import productRoutes from "./routes/product.route.js";
@@ -8,8 +9,6 @@ import { protect } from "./middlewares/auth.middelware.js";
 import authRoutes from "./routes/auth.route.js";
 import cors from "cors";
 
-dotenv.config();
-
 connectDB();
 
 console.log("JWT_SECRET from .env:", process.env.JWT_SECRET);
@@ -17,11 +16,11 @@ console.log("JWT_SECRET from .env:", process.env.JWT_SECRET);
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-
-app.use(cors({
-  origin: "*"
-}));
-
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use(express.json());
 
