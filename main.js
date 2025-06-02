@@ -17,15 +17,11 @@ console.log("JWT_SECRET from .env:", process.env.JWT_SECRET);
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://prakashwiser-node-js-project1-2.onrender.com",
-    ],
-    credentials: true,
-  })
-);
+
+app.use(cors({
+  origin: "*"
+}));
+
 
 app.use(express.json());
 
