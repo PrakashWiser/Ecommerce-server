@@ -9,13 +9,23 @@ import authRoutes from "./routes/auth.route.js";
 import cors from "cors";
 
 dotenv.config();
+
 connectDB();
+
 console.log("JWT_SECRET from .env:", process.env.JWT_SECRET);
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://prakashwiser-node-js-project1-2.onrender.com",
+    ],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
@@ -27,12 +37,12 @@ app.use("/api/movies", movieRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 
-app.use(notFound);
-app.use(errorHandler);
-
 app.get("/api/secret", protect, (req, res) => {
   res.json({ message: "This is a protected route", user: req.user });
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running at: http://localhost:${PORT}`);
