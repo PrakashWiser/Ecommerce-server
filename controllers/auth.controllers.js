@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import { console } from "inspector";
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -39,7 +40,6 @@ export const loginUser = async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match)
       return res.status(400).json({ message: "Invalid email or password" });
-
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
       expiresIn: "7d",
     });
@@ -102,27 +102,5 @@ export const forgotPassword = async (req, res) => {
   }
 };
 
-export const resetPassword = async (req, res) => {
-  const { token, password } = req.body;
 
-  try {
-    const user = await User.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() },
-    });
 
-    if (!user) {
-      return res.status(400).json({ message: "Invalid or expired token" });
-    }
-
-    user.password = await bcrypt.hash(password, 10);
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpires = undefined;
-    await user.save();
-
-    res.json({ message: "Password has been reset successfully" });
-  } catch (err) {
-    console.error("Reset password error:", err);
-    res.status(500).json({ message: "Server error" });
-  }
-};
