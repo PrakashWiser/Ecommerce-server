@@ -24,15 +24,16 @@ export const createProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
   try {
-    const quary = req.query.keyword
+    const query = req.query.keyword
       ? {
           name: {
-            $regax: req.query.keyword,
-            $options: "i",
+            $regex: req.query.keyword,
+            $options: "i", 
           },
         }
       : {};
-    const products = await Product.find(quary);
+
+    const products = await Product.find(query);
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });
