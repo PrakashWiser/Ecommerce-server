@@ -6,6 +6,7 @@ import productRoutes from "./routes/product.route.js";
 import { errorHandler, notFound } from "./middlewares/errorhandler.js";
 import { protect } from "./middlewares/auth.middelware.js";
 import authRoutes from "./routes/auth.route.js";
+import paymentRoutes from "./routes/payment.route.js";
 import cors from "cors";
 
 connectDB();
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/", paymentRoutes);
 
 app.get("/api/secret", protect, (req, res) => {
   res.json({ message: "This is a protected route", user: req.user });
