@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import connectDB from "./lib/db.js";
 import productRoutes from "./routes/product.route.js";
@@ -16,7 +17,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET_KEY,
 });
 
-dotenv.config();
 connectDB();
 
 const app = express();
